@@ -25,6 +25,8 @@ import com.googlecode.lanterna.terminal.TextColor;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalPosition;
 import com.googlecode.lanterna.terminal.TerminalSize;
+
+import java.text.BreakIterator;
 import java.util.*;
 
 /**
@@ -85,7 +87,7 @@ public class Screen
         this.terminalSize = new TerminalSize(terminalWidth, terminalHeight);
         this.visibleScreen = new ScreenCharacter[terminalHeight][terminalWidth];
         this.backbuffer = new ScreenCharacter[terminalHeight][terminalWidth];
-        this.paddingCharacter = new ScreenCharacter('X', TextColor.ANSI.GREEN, TextColor.ANSI.BLACK);
+        this.paddingCharacter = new ScreenCharacter("X", TextColor.ANSI.GREEN, TextColor.ANSI.BLACK);
         this.resizeQueue = new LinkedList<TerminalSize>();
         this.wholeScreenInvalid = false;
         this.hasBeenActivated = false;
@@ -151,7 +153,7 @@ public class Screen
     }
 
     public void setPaddingCharacter(
-            char character, 
+            String character, 
             TextColor foregroundColor, 
             TextColor backgroundColor, 
             ScreenCharacterStyle... style) {
@@ -238,7 +240,7 @@ public class Screen
      */
     public void clear() {        
         //ScreenCharacter is immutable, so we can use it for every element
-        ScreenCharacter background = new ScreenCharacter(' ');
+        ScreenCharacter background = new ScreenCharacter(" ");
         
         synchronized(mutex) {
             for(int y = 0; y < terminalSize.getRows(); y++) {
@@ -279,13 +281,23 @@ public class Screen
             TextColor backgroundColor, Set<ScreenCharacterStyle> styles)
     {    
     	string = tabBehaviour.replaceTabs(string, x);  	
-    	for(int i = 0; i < string.length(); i++) {
-            char character = string.charAt(i);
-            putCharacter(x + i, y, new ScreenCharacter(character, foregroundColor, backgroundColor, styles));
-            if(LanternaUtils.isCharCJK(character)) {
+    	BreakIterator boundary = BreakIterator.getCharacterInstance();
+    	int beginIndex = 0;
+    	boundary.setText(string);
+    	int i = 0;
+    	for (int nextIndex = boundary.next(); nextIndex > 0 ; nextIndex = boundary.next()) {
+            String graphemeString = string.substring(beginIndex, nextIndex);
+            putCharacter(x + i, y, new ScreenCharacter(graphemeString, foregroundColor, backgroundColor, styles));
+            if (graphemeString.length() > 1) {
+            	System.out.println(graphemeString);
+            	i++;
+            }
+            if(LanternaUtils.isCharCJK(graphemeString)) {
                 putCharacter(x + ++i, y, ScreenCharacter.CJK_PADDING_CHARACTER);
             }
-        }
+            beginIndex = nextIndex;
+            i++;
+    	}
     }
 
     void putCharacter(int x, int y, ScreenCharacter character)

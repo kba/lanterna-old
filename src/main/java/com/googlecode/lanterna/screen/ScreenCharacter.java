@@ -19,10 +19,10 @@
 
 package com.googlecode.lanterna.screen;
 
-import com.googlecode.lanterna.terminal.TextColor;
-import com.googlecode.lanterna.terminal.Terminal;
 import java.util.EnumSet;
 import java.util.Set;
+
+import com.googlecode.lanterna.terminal.TextColor;
 
 /**
  *
@@ -30,9 +30,9 @@ import java.util.Set;
  */
 class ScreenCharacter
 {
-    static final ScreenCharacter CJK_PADDING_CHARACTER = new ScreenCharacter('\0');
+    static final ScreenCharacter CJK_PADDING_CHARACTER = new ScreenCharacter("\0");
     
-    private final char character;
+    private final String character;
     private final TextColor foregroundColor;
     private final TextColor backgroundColor;
     private final boolean bold;
@@ -40,12 +40,12 @@ class ScreenCharacter
     private final boolean reverse;
     private final boolean blinking;
     
-    ScreenCharacter(char character) {
+    ScreenCharacter(String character) {
         this(character, TextColor.ANSI.DEFAULT, TextColor.ANSI.DEFAULT);
     }
     
     ScreenCharacter(
-            char character, 
+            String character, 
             TextColor foregroundColor, 
             TextColor backgroundColor) {
         this(character, foregroundColor, backgroundColor, EnumSet.noneOf(ScreenCharacterStyle.class));
@@ -57,7 +57,7 @@ class ScreenCharacter
      * anything!
      */
     ScreenCharacter(
-            char character, 
+            String character, 
             TextColor foregroundColor, 
             TextColor backgroundColor,
             Set<ScreenCharacterStyle> style) {
@@ -92,7 +92,7 @@ class ScreenCharacter
         this.blinking = character.blinking;
     }
 
-    char getCharacter() {
+    String getCharacter() {
         return character;
     }
 
@@ -120,35 +120,17 @@ class ScreenCharacter
     	return blinking;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if(obj == this) {
-            return true;
-        }
-        if(obj instanceof ScreenCharacter == false) {
-            return false;
-        }
-
-        ScreenCharacter other = ((ScreenCharacter)(obj));
-        return character == other.getCharacter() &&
-                getForegroundColor() == other.getForegroundColor() &&
-                getBackgroundColor() == other.getBackgroundColor() &&
-                isBold() == other.isBold() &&
-                isNegative() == other.isNegative() &&
-                isUnderline() == other.isUnderline() &&
-                isBlinking() == other.isBlinking();
-    }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 71 * hash + this.character;
+        hash = 71 * hash + ((character == null) ? 0 : character.hashCode());
         return hash;
     }
 
     @Override
     public String toString()
     {
-        return Character.toString(character);
+        return character;
     }
 }

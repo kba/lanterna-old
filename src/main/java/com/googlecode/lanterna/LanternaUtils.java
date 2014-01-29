@@ -25,7 +25,9 @@ package com.googlecode.lanterna;
 public class LanternaUtils {
     //Shamelessly stolen from http://stackoverflow.com/questions/1499804/how-can-i-detect-japanese-text-in-a-java-string
     //Contributed there by user Rakesh N
-    public static boolean isCharCJK(final char c) {
+    public static boolean isCharCJK(final String cStr) {
+    	if (cStr.length() == 0) return false;
+    	char c = cStr.charAt(0);
         if ((Character.UnicodeBlock.of(c) == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS)
                 || (Character.UnicodeBlock.of(c) == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A)
                 || (Character.UnicodeBlock.of(c) == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B)

@@ -71,14 +71,25 @@ public interface Terminal extends InputProvider
     public void setCursorVisible(boolean visible);
     
     /**
-     * Prints one character to the terminal at the current cursor location. Please
-     * note that the cursor will then move one column to the right but if reached
-     * the end of the line may move to the beginning of the next line.
-     * @param c
-     * @throws LanternaException 
-     */
-    public void putCharacter(char c);
+	 * Prints one unicode grapheme to the terminal at the current cursor
+	 * location. Please note that the cursor will then move one column to the
+	 * right but if reached the end of the line may move to the beginning of the
+	 * next line.
+	 * 
+	 * @param c
+	 * @throws LanternaException
+	 */
+    public void putCharacter(String c);
     
+    /**
+	 * Prints one character to the terminal at the current cursor location.
+	 * Please note that the cursor will then move one column to the right but if
+	 * reached the end of the line may move to the beginning of the next line.
+	 * 
+	 * @param c
+	 * @author kb
+	 */
+    public void putCharacter(char c);
     /**
      * Returns the character currently buffered for position x/y.
      * @param x
@@ -86,7 +97,7 @@ public interface Terminal extends InputProvider
      * @return
      * @author kba
      */
-    public char getCharacter(int x, int y);
+    public String getCharacter(int x, int y);
     
     /**
      * Activates an {@code SGR} code for all the following characters put to the 

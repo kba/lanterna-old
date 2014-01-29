@@ -107,12 +107,12 @@ public class ScreenWriter
     	}
     }
 
-    public void drawCharacter(final int x, final int y, final char character, final ScreenCharacterStyle... styles) {
-    	Set<ScreenCharacterStyle> styleSet = new HashSet<ScreenCharacterStyle>();
-    	styleSet.addAll(Arrays.asList(styles));
-    	ScreenCharacter screenCharacter = new ScreenCharacter(character, getForegroundColor(), getBackgroundColor(), styleSet);
-    	targetScreen.putCharacter(x, y, screenCharacter);
-    }
+//    public void drawCharacter(final int x, final int y, final char character, final ScreenCharacterStyle... styles) {
+//    	Set<ScreenCharacterStyle> styleSet = new HashSet<ScreenCharacterStyle>();
+//    	styleSet.addAll(Arrays.asList(styles));
+//    	ScreenCharacter screenCharacter = new ScreenCharacter(character, getForegroundColor(), getBackgroundColor(), styleSet);
+//    	targetScreen.putCharacter(x, y, screenCharacter);
+//    }
 
 
     @Override

@@ -213,7 +213,7 @@ public class SwingTerminal extends AbstractTerminal implements InputProvider
             for(int y = 0; y < size().getRows(); y++)
                 for(int x = 0; x < size().getColumns(); x++)
                     this.characterMap[y][x] = new TerminalCharacter(
-                            ' ', 
+                            " ", 
                             new CharacterANSIColor(Color.DEFAULT),
                             new CharacterANSIColor(Color.BLACK),
                             false, 
@@ -309,9 +309,14 @@ public class SwingTerminal extends AbstractTerminal implements InputProvider
         this.cursorVisible = visible;
         refreshScreen();
     }
-
     @Override
     public synchronized void putCharacter(char c)
+    {
+    	putCharacter(String.valueOf(c));
+    }
+
+    @Override
+    public synchronized void putCharacter(String c)
     {
         characterMap[textPosition.getRow()][textPosition.getColumn()] =
                 new TerminalCharacter(c, currentForegroundColor, currentBackgroundColor, currentlyBold, currentlyBlinking, currentlyUnderlined);
@@ -329,7 +334,7 @@ public class SwingTerminal extends AbstractTerminal implements InputProvider
         }
     }
 	@Override
-	public char getCharacter(int x, int y) 
+	public String getCharacter(int x, int y) 
 	{
 		return characterMap[y][x].character;
 	}
@@ -352,7 +357,7 @@ public class SwingTerminal extends AbstractTerminal implements InputProvider
         for(int y = 0; y < newSizeRows; y++)
             for(int x = 0; x < newSizeColumns; x++)
                 newCharacterMap[y][x] = new TerminalCharacter(
-                        ' ', 
+                        " ", 
                         new CharacterANSIColor(Color.WHITE), 
                         new CharacterANSIColor(Color.BLACK), 
                         false, 
@@ -634,7 +639,7 @@ public class SwingTerminal extends AbstractTerminal implements InputProvider
 
     private static class TerminalCharacter {
         
-        private final char character;
+        private final String character;
         private final TerminalCharacterColor foreground;
         private final TerminalCharacterColor background;
         private final boolean bold;
@@ -642,13 +647,13 @@ public class SwingTerminal extends AbstractTerminal implements InputProvider
         private final boolean underlined;
 
         TerminalCharacter(
-                char character, 
+                String character, 
                 TerminalCharacterColor foreground, 
                 TerminalCharacterColor background, 
                 boolean bold, 
                 boolean blinking, 
                 boolean underlined) {
-            this.character = character;
+            this.character = (character.equals("") ? String.valueOf(Character.MIN_VALUE) : character);
             this.foreground = foreground;
             this.background = background;
             this.bold = bold;
@@ -678,7 +683,7 @@ public class SwingTerminal extends AbstractTerminal implements InputProvider
 
         @Override
         public String toString() {
-            return Character.toString(character);
+            return character;
         }
     }
     

@@ -77,6 +77,13 @@ public abstract class StreamBasedTerminal extends InputEnabledAbstractTerminal {
         }
     }
 
+    @Override
+    public void putCharacter(String c) {
+        synchronized(writerMutex) {
+            writeToTerminal(translateCharacter(c.charAt(0)));
+        }
+    }
+
     /**
      * Allow subclasses (that are supposed to know what they're doing) to write directly to the terminal<br>
      * Warning! Be sure to call this method INSIDE of a synchronize(writeMutex) block!!!<br>
@@ -189,6 +196,6 @@ public abstract class StreamBasedTerminal extends InputEnabledAbstractTerminal {
     }
     
     @Override
-    public char getCharacter(int x, int y) { return Character.MIN_VALUE; }
+    public String getCharacter(int x, int y) { return String.valueOf(Character.MIN_VALUE); }
     
 }
