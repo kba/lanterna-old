@@ -150,8 +150,10 @@ public class TextBox extends AbstractInteractableComponent
     {
         try {
             switch(key.getKind()) {
-                case Tab:
                 case Enter:
+                	valueChanged();
+                	return Result.EVENT_HANDLED;
+                case Tab:
                     return Result.NEXT_INTERACTABLE_RIGHT;
                     
                 case ArrowDown:
