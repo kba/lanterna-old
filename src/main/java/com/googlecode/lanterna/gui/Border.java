@@ -37,8 +37,16 @@ public abstract class Border
 
     public static class Standard extends Border
     {
+    	private final int horizontalPadding;
+		private final int verticalPadding;
 
         public Standard() {
+        	this(1, 0);
+        }
+
+        public Standard(int horizontalPadding, int verticalPadding) {
+        	this.horizontalPadding = horizontalPadding;
+        	this.verticalPadding = verticalPadding;
         }
 
         @Override
@@ -77,7 +85,7 @@ public abstract class Border
         public TerminalPosition getInnerAreaLocation(int width, int height)
         {
             if(width > 2 && height > 2)
-                return new TerminalPosition(2, 1);
+                return new TerminalPosition(1 + horizontalPadding, 1 + verticalPadding);
             else
                 return new TerminalPosition(0,0);
         }
@@ -86,7 +94,9 @@ public abstract class Border
         public TerminalSize getInnerAreaSize(int width, int height)
         {
             if(width > 2 && height > 2)
-                return new TerminalSize(width - 4, height - 2);
+				return new TerminalSize(
+						width - 2 * (1 + horizontalPadding),
+						height - 2 * (1 + verticalPadding));
             else
                 return new TerminalSize(width, height);
         }
