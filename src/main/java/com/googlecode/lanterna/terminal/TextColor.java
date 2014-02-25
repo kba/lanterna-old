@@ -18,6 +18,8 @@
  */
 package com.googlecode.lanterna.terminal;
 
+import com.googlecode.lanterna.terminal.Terminal.Color;
+
 /**
  *
  * @author Martin
@@ -28,6 +30,8 @@ public abstract class TextColor {
     
     public abstract void applyAsForeground(Terminal terminal);
     public abstract void applyAsBackground(Terminal terminal);
+    
+//    public abstract Terminal.Color toOldColor();
     
     public static TextColor fromOldFormat(Terminal.Color color) {
         switch(color) {
@@ -81,6 +85,10 @@ public abstract class TextColor {
         public void applyAsBackground(Terminal terminal) {
             terminal.applyBackgroundColor(ansiColor);
         }
+
+		public Color toOldColor() {
+			return ansiColor;
+		}
     }
     
     public static class Indexed extends TextColor {
@@ -107,6 +115,14 @@ public abstract class TextColor {
         public void applyAsBackground(Terminal terminal) {
             terminal.applyBackgroundColor(colorIndex);
         }
+//
+//		@Override
+//		public Color toOldColor() {
+//			// TODO Auto-generated method stub
+//			java.awt.Color awtColor = XTerm8bitIndexedColorUtils.getAWTColor(colorIndex);
+//			int ansiInt = XTerm8bitIndexedColorUtils.getClosestColorANSI(awtColor.getRed(), awtColor.getGreen(), awtColor.getBlue());
+//			return Color.values()[ansiInt];
+//		}
     }
     
     public static class RGB extends TextColor {
@@ -150,5 +166,12 @@ public abstract class TextColor {
         public void applyAsBackground(Terminal terminal) {
             terminal.applyBackgroundColor(r, g, b);
         }
+
+//		@Override
+//		public Color toOldColor() {
+//			int ansiInt = XTerm8bitIndexedColorUtils.getClosestColorANSI(r, g, b);
+//			// TODO Auto-generated method stub
+//			return Color.values()[ansiInt];
+//		}
     }
 }
