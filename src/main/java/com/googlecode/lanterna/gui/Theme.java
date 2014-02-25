@@ -32,7 +32,8 @@ import com.googlecode.lanterna.terminal.TextColor;
  */
 public class Theme {
     private static final Definition DEFAULT = new Definition(TextColor.ANSI.BLACK, TextColor.ANSI.WHITE, false);
-    private static final Definition SELECTED = new Definition(TextColor.ANSI.WHITE, TextColor.ANSI.BLUE, true);
+    private static final Definition SELECTED = new Definition(TextColor.ANSI.RED, TextColor.ANSI.WHITE, true);
+    private static final Definition INTERACTABLE_FOCUSSED = new Definition(TextColor.ANSI.YELLOW, TextColor.ANSI.BLUE, true);
     private Map<Category, Definition> styles = new EnumMap<Category, Definition>(Category.class);
     private static final Theme DEFAULT_INSTANCE = new Theme();
 
@@ -56,7 +57,13 @@ public class Theme {
         TEXTBOX,
         TEXTBOX_FOCUSED,
         PROGRESS_BAR_COMPLETED,
-        PROGRESS_BAR_REMAINING
+        PROGRESS_BAR_REMAINING,
+        FILE_LIST_DIRECTORY,
+        FILE_LIST_SYMLINK,
+        FILE_LIST_NORMAL_FILE,
+        FILE_LIST_DIRECTORY_SELECTED,
+        FILE_LIST_SYMLINK_SELECTED,
+        FILE_LIST_NORMAL_FILE_SELECTED,
     }
 
     protected Theme() {
@@ -65,18 +72,24 @@ public class Theme {
         setDefinition(Category.SHADOW, new Definition(TextColor.ANSI.BLACK, TextColor.ANSI.BLACK, true));
         setDefinition(Category.BORDER, new Definition(TextColor.ANSI.BLACK, TextColor.ANSI.WHITE, true));
         setDefinition(Category.RAISED_BORDER, new Definition(TextColor.ANSI.WHITE, TextColor.ANSI.WHITE, true));
-        setDefinition(Category.BUTTON_LABEL_ACTIVE, new Definition(TextColor.ANSI.YELLOW, TextColor.ANSI.BLUE, true));
+		setDefinition(Category.BUTTON_LABEL_ACTIVE, INTERACTABLE_FOCUSSED);
         setDefinition(Category.BUTTON_LABEL_INACTIVE, new Definition(TextColor.ANSI.BLACK, TextColor.ANSI.WHITE, true));
         setDefinition(Category.BUTTON_ACTIVE, SELECTED);
         setDefinition(Category.BUTTON_INACTIVE, DEFAULT);
         setDefinition(Category.LIST_ITEM, DEFAULT);
         setDefinition(Category.LIST_ITEM_SELECTED, SELECTED);
+        
+        
         setDefinition(Category.CHECKBOX, DEFAULT);
         setDefinition(Category.CHECKBOX_SELECTED, SELECTED);
         setDefinition(Category.TEXTBOX, SELECTED);
-        setDefinition(Category.TEXTBOX_FOCUSED, new Definition(TextColor.ANSI.YELLOW, TextColor.ANSI.BLUE, true));
+        setDefinition(Category.TEXTBOX_FOCUSED, INTERACTABLE_FOCUSSED);
         setDefinition(Category.PROGRESS_BAR_COMPLETED, new Definition(TextColor.ANSI.GREEN, TextColor.ANSI.BLACK, false));
         setDefinition(Category.PROGRESS_BAR_REMAINING, new Definition(TextColor.ANSI.RED, TextColor.ANSI.BLACK, false));
+
+        setDefinition(Category.FILE_LIST_DIRECTORY, new Definition(TextColor.ANSI.YELLOW, TextColor.ANSI.BLUE, true));
+        setDefinition(Category.FILE_LIST_SYMLINK, new Definition(TextColor.ANSI.RED, TextColor.ANSI.BLUE));
+        setDefinition(Category.FILE_LIST_NORMAL_FILE, new Definition(TextColor.ANSI.WHITE, TextColor.ANSI.BLUE));
     }
 
     public Theme.Definition getDefinition(Category category) {
