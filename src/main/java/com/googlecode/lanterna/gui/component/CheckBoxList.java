@@ -107,12 +107,12 @@ public class CheckBoxList extends AbstractListBox
     }
 
     @Override
-    protected Definition getListItemThemeDefinition(Theme theme) {
-        return theme.getDefinition(Theme.Category.TEXTBOX_FOCUSED);
+    protected Definition getListItemThemeDefinition(Theme theme, int itemIndex) {
+        return theme.getDefinition(Theme.Category.LIST_ITEM);
     }
 
     @Override
-    protected Definition getSelectedListItemThemeDefinition(Theme theme) {
-        return theme.getDefinition(Theme.Category.TEXTBOX_FOCUSED);
+    protected Definition getSelectedListItemThemeDefinition(Theme theme, int itemIndex) {
+        return theme.getDefinition(Theme.Category.LIST_ITEM_SELECTED);
     }
 }

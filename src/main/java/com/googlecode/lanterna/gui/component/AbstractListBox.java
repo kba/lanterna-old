@@ -140,7 +140,7 @@ public abstract class AbstractListBox extends AbstractInteractableComponent {
             scrollTopIndex = items.size() - graphics.getHeight();
         }
 
-        graphics.applyTheme(getListItemThemeDefinition(graphics.getTheme()));
+        graphics.applyTheme(getListItemThemeDefinition(graphics.getTheme(), -1));
         graphics.fillArea(' ');
 
         for(int i = scrollTopIndex; i < items.size(); i++) {
@@ -148,9 +148,9 @@ public abstract class AbstractListBox extends AbstractInteractableComponent {
                 break;
 
             if(i == selectedIndex && hasFocus())
-                graphics.applyTheme(getSelectedListItemThemeDefinition(graphics.getTheme()));
+                graphics.applyTheme(getSelectedListItemThemeDefinition(graphics.getTheme(), i));
             else
-                graphics.applyTheme(getListItemThemeDefinition(graphics.getTheme()));
+                graphics.applyTheme(getListItemThemeDefinition(graphics.getTheme(), i));
             printItem(graphics, 0, 0 + i - scrollTopIndex, i);
         }
 
@@ -190,11 +190,11 @@ public abstract class AbstractListBox extends AbstractInteractableComponent {
             selectedIndex = items.size() - 1;
     }
 
-    protected Theme.Definition getSelectedListItemThemeDefinition(Theme theme) {
+    protected Theme.Definition getSelectedListItemThemeDefinition(Theme theme, int itemIndex) {
         return theme.getDefinition(Theme.Category.LIST_ITEM_SELECTED);
     }
 
-    protected Theme.Definition getListItemThemeDefinition(Theme theme) {
+    protected Theme.Definition getListItemThemeDefinition(Theme theme, int itemIndex) {
         return theme.getDefinition(Category.LIST_ITEM);
     }
 

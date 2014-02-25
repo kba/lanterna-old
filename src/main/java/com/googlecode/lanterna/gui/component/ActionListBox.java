@@ -86,12 +86,12 @@ public class ActionListBox extends AbstractListBox {
     }
 
     @Override
-    protected Theme.Definition getListItemThemeDefinition(Theme theme) {
+    protected Theme.Definition getListItemThemeDefinition(Theme theme, int index) {
         return theme.getDefinition(Theme.Category.DIALOG_AREA);
     }
 
     @Override
-    protected Theme.Definition getSelectedListItemThemeDefinition(Theme theme) {
+    protected Theme.Definition getSelectedListItemThemeDefinition(Theme theme, int index) {
         return theme.getDefinition(Theme.Category.TEXTBOX_FOCUSED);
     }
     

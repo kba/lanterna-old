@@ -21,11 +21,12 @@ public class PopupCheckBoxList extends RadioCheckBoxList {
 		if (poppedUp) {
 			return super.createItemString(index);
 		}
-		if (getCheckedItemIndex() > -1) {
-			return ACS.ARROW_DOWN + this.getItemAt(index).toString();
-		} else {
-			return EMPTY_SELECT;
-		}
+		String drawString = (getCheckedItemIndex() > -1)
+				? this.getItemAt(index).toString()
+				: (getSize() > 0) 
+					? this.getItemAt(0).toString()
+					: EMPTY_SELECT;
+        return ACS.ARROW_DOWN + drawString;
 	}
 	
 	@Override
@@ -33,7 +34,7 @@ public class PopupCheckBoxList extends RadioCheckBoxList {
 		if (poppedUp) {
 			super.repaint(graphics);
 		} else {
-			if (hasFocus()) graphics.applyTheme(getListItemThemeDefinition(graphics.getTheme()));
+			if (hasFocus()) graphics.applyTheme(getListItemThemeDefinition(graphics.getTheme(), -1));
 			graphics.drawString(0, 0, createItemString(getCheckedItemIndex()));
 			setHotspot(graphics.translateToGlobalCoordinates(new TerminalPosition(0, 0)));
 		}
@@ -67,9 +68,9 @@ public class PopupCheckBoxList extends RadioCheckBoxList {
 		if (poppedUp) {
 			return super.getPreferredSize();
 		}
-		// TODO size is not correct because of getCheckedItemIndex returning -1
+//		// TODO size is not correct because of getCheckedItemIndex returning -1
 //		System.out.println("" + getCheckedItemIndex());
-		int width = getCheckedItemIndex() > -1 ? createItemString(getSelectedIndex()).length() : EMPTY_SELECT.length();
+		int width = createItemString(getCheckedItemIndex()).length();
 		return new TerminalSize(width+1, 1);
 	}
 	

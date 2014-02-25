@@ -21,6 +21,7 @@ package com.googlecode.lanterna.gui.component;
 
 import com.googlecode.lanterna.gui.Interactable;
 import com.googlecode.lanterna.gui.Theme;
+import com.googlecode.lanterna.gui.Theme.Definition;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.terminal.TerminalSize;
 
@@ -150,12 +151,12 @@ public class RadioCheckBoxList extends AbstractListBox {
     }
 
     @Override
-    protected Theme.Definition getListItemThemeDefinition(Theme theme) {
-        return theme.getDefinition(Theme.Category.TEXTBOX_FOCUSED);
+    protected Definition getListItemThemeDefinition(Theme theme, int itemIndex) {
+        return theme.getDefinition(Theme.Category.LIST_ITEM);
     }
 
     @Override
-    protected Theme.Definition getSelectedListItemThemeDefinition(Theme theme) {
-        return theme.getDefinition(Theme.Category.TEXTBOX_FOCUSED);
+    protected Definition getSelectedListItemThemeDefinition(Theme theme, int itemIndex) {
+        return theme.getDefinition(Theme.Category.LIST_ITEM_SELECTED);
     }
 }
