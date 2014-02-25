@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * Copyright (C) 2010-2012 Martin
+ * Copyright (C) 2010-2014 Martin
  */
 
 package com.googlecode.lanterna.gui;
@@ -121,9 +121,16 @@ public interface Component
      */
     Alignment getAlignment();
     
+    /**
+     * Surrounds this component with a specified border
+     * @param border Border to use
+     * @return New component which contains the original wrapped with the specified border
+     */
+    Component addBorder(Border border, String title);
+    
     public static enum Alignment {
         TOP_CENTER,
-        BOTTON_CENTER,
+        BOTTOM_CENTER,
         LEFT_CENTER,
         RIGHT_CENTER,
         CENTER,

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * Copyright (C) 2010-2012 Martin
+ * Copyright (C) 2010-2014 Martin
  */
 package com.googlecode.lanterna.terminal;
 
@@ -39,11 +39,11 @@ public class TerminalPosition {
         this.row = row;
         this.column = column;
     }
-    
+
     public int x() {
     	return column;
     }
-    
+
     public int y() {
     	return row;
     }
@@ -55,15 +55,15 @@ public class TerminalPosition {
     public int getRow() {
         return row;
     }
-    
+
     public TerminalPosition withRow(int row) {
         return new TerminalPosition(this.column, row);
     }
-    
+
     public TerminalPosition withColumn(int column) {
         return new TerminalPosition(column, this.row);
     }
-    
+
     public TerminalPosition copy() {
     	return new TerminalPosition(column, row);
     }

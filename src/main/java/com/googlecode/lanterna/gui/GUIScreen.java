@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * Copyright (C) 2010-2012 Martin
+ * Copyright (C) 2010-2014 Martin
  */
 
 package com.googlecode.lanterna.gui;
@@ -235,12 +235,15 @@ public class GUIScreen
                         actionToRunInEventThread.clear();
                     }
                 }
-                
+
                 if(actions != null) {
                     for(Action nextAction: actions) {
                         nextAction.doAction();
                     }
-                }                
+                }
+
+                //Make sure we have a component in focus if there is one available
+                windowStack.getLast().window.checkFocus();
 
                 boolean repainted = update();
 

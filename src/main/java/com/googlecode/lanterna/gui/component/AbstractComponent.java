@@ -14,24 +14,25 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * Copyright (C) 2010-2012 Martin
+ * Copyright (C) 2010-2014 Martin
  */
 
 package com.googlecode.lanterna.gui.component;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
+import com.googlecode.lanterna.gui.Border;
 import com.googlecode.lanterna.gui.Component;
 import com.googlecode.lanterna.gui.Container;
 import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.TextGraphics;
 import com.googlecode.lanterna.gui.Window;
+import com.googlecode.lanterna.gui.layout.LinearLayout;
 import com.googlecode.lanterna.gui.listener.ComponentListener;
 import com.googlecode.lanterna.terminal.TerminalPosition;
 import com.googlecode.lanterna.terminal.TerminalSize;
 
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -163,6 +164,13 @@ public abstract class AbstractComponent implements Component
         return window.getOwner();
     }
 
+    @Override
+    public Component addBorder(Border border, String title) {
+        Panel panel = new Panel(title, border, Panel.Orientation.VERTICAL);
+        panel.addComponent(this, LinearLayout.GROWS_HORIZONTALLY, LinearLayout.GROWS_VERTICALLY);
+        return panel;
+    }
+
     /**
      * Will create a sub-graphic area according to the alignment, if the assigned size is larger 
      * than the preferred size.
@@ -180,7 +188,7 @@ public abstract class AbstractComponent implements Component
         }
         
         int leftPosition = 0;
-        if(alignment == Alignment.TOP_CENTER || alignment == Alignment.CENTER || alignment == Alignment.BOTTON_CENTER) {
+        if(alignment == Alignment.TOP_CENTER || alignment == Alignment.CENTER || alignment == Alignment.BOTTOM_CENTER) {
             leftPosition = (graphics.getWidth() - preferredSize.getColumns()) / 2;
         }
         else if(alignment == Alignment.TOP_RIGHT || alignment == Alignment.RIGHT_CENTER || alignment == Alignment.BOTTOM_RIGHT) {
@@ -191,7 +199,7 @@ public abstract class AbstractComponent implements Component
         if(alignment == Alignment.LEFT_CENTER || alignment == Alignment.CENTER || alignment == Alignment.RIGHT_CENTER) {
             topPosition = (graphics.getHeight() - preferredSize.getRows()) / 2;
         }
-        else if(alignment == Alignment.BOTTOM_LEFT || alignment == Alignment.BOTTON_CENTER || alignment == Alignment.BOTTOM_RIGHT) {
+        else if(alignment == Alignment.BOTTOM_LEFT || alignment == Alignment.BOTTOM_CENTER || alignment == Alignment.BOTTOM_RIGHT) {
             topPosition = graphics.getHeight() - preferredSize.getRows();
         }
         return graphics.subAreaGraphics(new TerminalPosition(leftPosition, topPosition), preferredSize);

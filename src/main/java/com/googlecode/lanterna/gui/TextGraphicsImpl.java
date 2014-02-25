@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * Copyright (C) 2010-2012 Martin
+ * Copyright (C) 2010-2014 Martin
  */
 
 package com.googlecode.lanterna.gui;
@@ -54,8 +54,8 @@ class TextGraphicsImpl implements TextGraphics
         this.screen = screen;
         this.theme = theme;
         this.currentlyBold = false;
-        this.foregroundColor = TextColor.fromOldFormat(Terminal.Color.DEFAULT);
-        this.backgroundColor = TextColor.fromOldFormat(Terminal.Color.DEFAULT);
+        this.foregroundColor = TextColor.ANSI.DEFAULT;
+        this.backgroundColor = TextColor.ANSI.DEFAULT;
     }
 
     private TextGraphicsImpl(final TextGraphicsImpl graphics, final TerminalPosition topLeft, final TerminalSize areaSize)

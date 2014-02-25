@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * Copyright (C) 2010-2012 Martin
+ * Copyright (C) 2010-2014 Martin
  */
 
 package com.googlecode.lanterna.input;
@@ -37,7 +37,7 @@ public class Key
     public Key(char character) {
         this(character, false, false);
     }
-    
+
     public Key(char character, boolean ctrlPressed, boolean altPressed) {
         this.character = character;
         this.kind = Kind.NormalKey;
@@ -120,7 +120,7 @@ public class Key
         private Kind() {
             this(null);
         }
-        
+
         private Kind(Character representationKey) {
             this.representationKey = representationKey;
         }
@@ -129,7 +129,7 @@ public class Key
             return representationKey;
         }
     }
-    
+
     /**
  	 * Creates a Key from a string representation in Vim's key notation.
      * @param keyStr the string representation of this key
@@ -188,7 +188,7 @@ public class Key
     	} else throw new IllegalArgumentException("Invalid vim notation: "  + keyStr);
     	return k;
     }
-    
+
     public boolean equalsString(String... keyStrs) {
     	boolean match = false;
 		for (String keyStr : keyStrs) {

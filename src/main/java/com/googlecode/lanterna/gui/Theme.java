@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * Copyright (C) 2010-2012 Martin
+ * Copyright (C) 2010-2014 Martin
  */
 package com.googlecode.lanterna.gui;
 
@@ -32,7 +32,7 @@ import com.googlecode.lanterna.terminal.TextColor;
  */
 public class Theme {
     private static final Definition DEFAULT = new Definition(TextColor.ANSI.BLACK, TextColor.ANSI.WHITE, false);
-    private static final Definition SELECTED = new Definition(TextColor.ANSI.RED, TextColor.ANSI.WHITE, true);
+    private static final Definition SELECTED = new Definition(TextColor.ANSI.WHITE, TextColor.ANSI.BLUE, true);
     private static final Definition INTERACTABLE_FOCUSSED = new Definition(TextColor.ANSI.YELLOW, TextColor.ANSI.BLUE, true);
     private Map<Category, Definition> styles = new EnumMap<Category, Definition>(Category.class);
     private static final Theme DEFAULT_INSTANCE = new Theme();
@@ -72,24 +72,23 @@ public class Theme {
         setDefinition(Category.SHADOW, new Definition(TextColor.ANSI.BLACK, TextColor.ANSI.BLACK, true));
         setDefinition(Category.BORDER, new Definition(TextColor.ANSI.BLACK, TextColor.ANSI.WHITE, true));
         setDefinition(Category.RAISED_BORDER, new Definition(TextColor.ANSI.WHITE, TextColor.ANSI.WHITE, true));
-		setDefinition(Category.BUTTON_LABEL_ACTIVE, INTERACTABLE_FOCUSSED);
+        setDefinition(Category.BUTTON_LABEL_ACTIVE, INTERACTABLE_FOCUSSED);
         setDefinition(Category.BUTTON_LABEL_INACTIVE, new Definition(TextColor.ANSI.BLACK, TextColor.ANSI.WHITE, true));
         setDefinition(Category.BUTTON_ACTIVE, SELECTED);
         setDefinition(Category.BUTTON_INACTIVE, DEFAULT);
         setDefinition(Category.LIST_ITEM, DEFAULT);
         setDefinition(Category.LIST_ITEM_SELECTED, SELECTED);
-        
-        
+
         setDefinition(Category.CHECKBOX, DEFAULT);
         setDefinition(Category.CHECKBOX_SELECTED, SELECTED);
         setDefinition(Category.TEXTBOX, SELECTED);
         setDefinition(Category.TEXTBOX_FOCUSED, INTERACTABLE_FOCUSSED);
-        setDefinition(Category.PROGRESS_BAR_COMPLETED, new Definition(TextColor.ANSI.GREEN, TextColor.ANSI.BLACK, false));
-        setDefinition(Category.PROGRESS_BAR_REMAINING, new Definition(TextColor.ANSI.RED, TextColor.ANSI.BLACK, false));
 
         setDefinition(Category.FILE_LIST_DIRECTORY, new Definition(TextColor.ANSI.YELLOW, TextColor.ANSI.BLUE, true));
         setDefinition(Category.FILE_LIST_SYMLINK, new Definition(TextColor.ANSI.RED, TextColor.ANSI.BLUE));
         setDefinition(Category.FILE_LIST_NORMAL_FILE, new Definition(TextColor.ANSI.WHITE, TextColor.ANSI.BLUE));
+        setDefinition(Category.PROGRESS_BAR_COMPLETED, new Definition(TextColor.ANSI.GREEN, TextColor.ANSI.BLACK, false));
+        setDefinition(Category.PROGRESS_BAR_REMAINING, new Definition(TextColor.ANSI.RED, TextColor.ANSI.BLACK, false));
     }
 
     public Theme.Definition getDefinition(Category category) {

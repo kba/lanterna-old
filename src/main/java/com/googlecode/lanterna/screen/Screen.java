@@ -14,12 +14,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * Copyright (C) 2010-2012 Martin
+ * Copyright (C) 2010-2014 Martin
  */
 
 package com.googlecode.lanterna.screen;
 
-import com.googlecode.lanterna.LanternaUtils;
+import com.googlecode.lanterna.CJKUtils;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.terminal.TextColor;
 import com.googlecode.lanterna.terminal.Terminal;
@@ -282,7 +282,7 @@ public class Screen
     	for(int i = 0; i < string.length(); i++) {
             char character = string.charAt(i);
             putCharacter(x + i, y, new ScreenCharacter(character, foregroundColor, backgroundColor, styles));
-            if(LanternaUtils.isCharCJK(character)) {
+            if(CJKUtils.isCharCJK(character)) {
                 putCharacter(x + ++i, y, ScreenCharacter.CJK_PADDING_CHARACTER);
             }
         }
@@ -451,7 +451,7 @@ public class Screen
     private class TerminalResizeListener implements Terminal.ResizeListener
     {
         @Override
-        public void onResized(TerminalSize newSize)
+        public void onResized(Terminal terminal, TerminalSize newSize)
         {
             synchronized(resizeQueue) {
                 if(!terminalSize.equals(newSize)) {

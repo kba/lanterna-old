@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * Copyright (C) 2010-2012 Martin
+ * Copyright (C) 2010-2014 Martin
  */
 
 package com.googlecode.lanterna.test.terminal;
@@ -36,7 +36,7 @@ public class ResetAllTest {
         terminal.putCharacter('e');
         terminal.applySGR(Terminal.SGR.ENTER_BOLD);
         terminal.putCharacter('l');
-        terminal.applyForegroundColor(Terminal.Color.CYAN);
+        terminal.applyForegroundColor(Terminal.ANSIColor.CYAN);
         terminal.putCharacter('l');
         terminal.applySGR(Terminal.SGR.ENTER_REVERSE);
         terminal.putCharacter('o');

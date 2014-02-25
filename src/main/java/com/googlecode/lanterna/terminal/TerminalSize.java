@@ -1,3 +1,5 @@
+package com.googlecode.lanterna.terminal;
+
 /*
  * This file is part of lanterna (http://code.google.com/p/lanterna/).
  * 
@@ -14,8 +16,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * Copyright (C) 2010-2012 Martin
- */
+ * Copyright (C) 2010-2014 Martin
+ /
 package com.googlecode.lanterna.terminal;
 
 /**

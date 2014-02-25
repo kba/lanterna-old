@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * Copyright (C) 2010-2012 Martin
+ * Copyright (C) 2010-2014 Martin
  */
 
 package com.googlecode.lanterna.gui.component;
@@ -62,7 +62,7 @@ public class RadioCheckBoxList extends AbstractListBox {
     public void addItem(Object item) {
         super.addItem(item);
     }
-    
+
     /**
      * This method will see if an object is the currently selected item in this RadioCheckBoxList
      * @param object Object to test if it's the selected one
@@ -72,13 +72,13 @@ public class RadioCheckBoxList extends AbstractListBox {
     public Boolean isChecked(Object object) {
         if(object == null)
             return null;
-        
+
         if(indexOf(object) == -1)
             return null;
-        
+
         return checkedIndex == indexOf(object);
     }
-    
+
     /**
      * This method will see if an item, adressed by index, is the currently selected item in this 
      * RadioCheckBoxList
@@ -89,7 +89,7 @@ public class RadioCheckBoxList extends AbstractListBox {
     public Boolean isChecked(int index) {
         if(index < 0 || index >= getNrOfItems())
             return null;
-        
+
         return checkedIndex == index;
     }
 
@@ -100,7 +100,7 @@ public class RadioCheckBoxList extends AbstractListBox {
     public void setCheckedItemIndex(int index) {
         if(index < -1 || index >= getNrOfItems())
             return;
-        
+
         checkedIndex = index;
         invalidate();
     }
@@ -111,14 +111,14 @@ public class RadioCheckBoxList extends AbstractListBox {
     public int getCheckedItemIndex() {
         return checkedIndex;
     }
-    
+
     /**
      * @return The object currently selected, or null if there is no selection
      */
     public Object getCheckedItem() {
         if(checkedIndex == -1 || checkedIndex >= getNrOfItems())
             return null;
-        
+
         return getItemAt(checkedIndex);
     }
 
@@ -126,7 +126,7 @@ public class RadioCheckBoxList extends AbstractListBox {
     protected Interactable.Result unhandledKeyboardEvent(Key key) {
         if(getSelectedIndex() == -1)
             return Interactable.Result.EVENT_NOT_HANDLED;
-        
+
         if(key.getKind() == Key.Kind.Enter || key.getCharacter() == ' ') {
             checkedIndex = getSelectedIndex();
             valueChanged();
@@ -139,13 +139,13 @@ public class RadioCheckBoxList extends AbstractListBox {
     protected int getHotSpotPositionOnLine(int selectedIndex) {
         return 1;
     }
-    
+
     @Override
     protected String createItemString(int index) {
         String check = " ";
         if(checkedIndex == index)
             check = "o";
-        
+
         String text = getItemAt(index).toString();
         return "<" + check + "> " + text;
     }
