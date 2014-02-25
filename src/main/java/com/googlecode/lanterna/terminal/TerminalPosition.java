@@ -39,6 +39,14 @@ public class TerminalPosition {
         this.row = row;
         this.column = column;
     }
+    
+    public int x() {
+    	return column;
+    }
+    
+    public int y() {
+    	return row;
+    }
 
     public int getColumn() {
         return column;
@@ -54,6 +62,10 @@ public class TerminalPosition {
     
     public TerminalPosition withColumn(int column) {
         return new TerminalPosition(column, this.row);
+    }
+    
+    public TerminalPosition copy() {
+    	return new TerminalPosition(column, row);
     }
 
     @Override
